@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the PHPUtils package.
+ * This file is part of the PHP String Utils package.
  *
  * (c) Prince Dorcis <princedorcis@gmail.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Prinx\Utils;
+namespace Prinx;
 
 /**
  * String utilities class
@@ -188,13 +188,11 @@ class Str
 
         $country_type = preg_match('/^[0-9]+$/', $country) ? 'prefix' : 'name';
 
-        if (
-            $country_type === 'name' &&
+        if ('name' === $country_type &&
             array_key_exists($country, $country_codes)
         ) {
             $prefix = $country_codes[$country];
-        } elseif (
-            $country_type === 'prefix' &&
+        } elseif ('prefix' === $country_type &&
             in_array($country, $country_codes)
         ) {
             $prefix = $country;
