@@ -12,19 +12,20 @@
 namespace Prinx;
 
 /**
- * String utilities class
+ * String utilities class.
  *
  * @author Prince Dorcis <princedorcis@gmail.com>
  */
 class Str
 {
     /**
-     * Check if a string contains only alphabetic characters
+     * Check if a string contains only alphabetic characters.
      *
      * @param string $str
-     * @param integer $minLength
-     * @param integer $maxLength
-     * @return boolean
+     * @param int    $minLength
+     * @param int    $maxLength
+     *
+     * @return bool
      */
     public static function isAlphabetic($str, $minLength = 1, $maxLength = -1)
     {
@@ -36,16 +37,17 @@ class Str
             $inLength = $inLength && ($length <= $maxLength);
         }
 
-        return $inLength && '' . intval($str) !== $str && '' . floatval($str) !== $str;
+        return $inLength && ''.intval($str) !== $str && ''.floatval($str) !== $str;
     }
 
     /**
-     * Check if a string contains only alphabetic characters
+     * Check if a string contains only alphabetic characters.
      *
      * @param string $str
-     * @param integer $minLength
-     * @param integer $maxLength
-     * @return boolean
+     * @param int    $minLength
+     * @param int    $maxLength
+     *
+     * @return bool
      */
     public static function isAlphanumeric($str)
     {
@@ -53,10 +55,11 @@ class Str
     }
 
     /**
-     * Check if a string represents a number
+     * Check if a string represents a number.
      *
      * @param string $num
-     * @return boolean
+     *
+     * @return bool
      */
     public static function isNumeric($num)
     {
@@ -65,10 +68,11 @@ class Str
     }
 
     /**
-     * Check if a string represents a float number
+     * Check if a string represents a float number.
      *
      * @param string $num
-     * @return boolean
+     *
+     * @return bool
      */
     public static function isFloatNumeric($num)
     {
@@ -76,10 +80,11 @@ class Str
     }
 
     /**
-     * Check if a string represents an integer number
+     * Check if a string represents an integer number.
      *
      * @param string $num
-     * @return boolean
+     *
+     * @return bool
      */
     public static function isIntegerNumeric($num)
     {
@@ -87,10 +92,11 @@ class Str
     }
 
     /**
-     * Convert a string to camel case
+     * Convert a string to camel case.
      *
-     * @param string $name
+     * @param string            $name
      * @param null|string|array $sep
+     *
      * @return string
      */
     public static function camelCase($name, $sep = null)
@@ -103,8 +109,9 @@ class Str
      *
      * If no separator passed, the default separators are used.
      *
-     * @param string $name
+     * @param string            $name
      * @param string|array|null $separators
+     *
      * @return string
      */
     public static function pascalCase($name, $separators = null)
@@ -133,8 +140,9 @@ class Str
      *
      * If no separator passed, the function uses every character that is neither an alphabetic character nor a number as seperator.
      *
-     * @param string $name
+     * @param string            $name
      * @param string|array|null $separators
+     *
      * @return string
      */
     public function pascalCaseNew($name, $separators = null)
@@ -147,7 +155,7 @@ class Str
             $pascal_case = preg_replace('/[^a-z0-9]/i', $separators, $pascal_case);
             $separators = [$separators];
         } elseif (!is_array($separators)) {
-            throw new \Exception("Separator must be either NULL or a string or an array. Got " . gettype($separators));
+            throw new \Exception('Separator must be either NULL or a string or an array. Got '.gettype($separators));
         }
 
         foreach ($separators as $sep) {
@@ -165,10 +173,11 @@ class Str
     }
 
     /**
-     * Put a telephone number in international format
+     * Put a telephone number in international format.
      *
      * @param string $number
      * @param string $country
+     *
      * @return string
      */
     public static function oldInternationalizeNumber(
@@ -200,19 +209,20 @@ class Str
             $prefix = $default_country_code;
         }
 
-        if (!preg_match('/^' . $prefix . '/', $num)) {
-            $num = $prefix . $num;
+        if (!preg_match('/^'.$prefix.'/', $num)) {
+            $num = $prefix.$num;
         }
 
         return $num;
     }
 
     /**
-     * Put a telephone number in international format
+     * Put a telephone number in international format.
      *
-     * @param string $number
+     * @param string     $number
      * @param string|int $countryCode
-     * @param boolean $addPlus
+     * @param bool       $addPlus
+     *
      * @return string
      */
     public static function internationaliseNumber($number, $countryCode, $addPlus = false)
@@ -222,20 +232,21 @@ class Str
         $num = ltrim($num, '0');
 
         if (!self::startsWith($countryCode, $num)) {
-            $num = $countryCode . $num;
+            $num = $countryCode.$num;
         }
 
         if ($addPlus && !self::startsWith('+', $num)) {
-            $num = '+' . $num;
+            $num = '+'.$num;
         }
 
         return $num;
     }
 
     /**
-     * Make uppercase each word of the string passed to it
+     * Make uppercase each word of the string passed to it.
      *
      * @param string $str
+     *
      * @return string
      */
     public static function capitalise(string $str)
@@ -244,17 +255,18 @@ class Str
         $capitalised = '';
 
         foreach ($exploded as $value) {
-            $capitalised .= ucfirst(strtolower($value)) . ' ';
+            $capitalised .= ucfirst(strtolower($value)).' ';
         }
 
         return trim($capitalised);
     }
 
     /**
-     * Check if a string can be parse to a telephone number
+     * Check if a string can be parse to a telephone number.
      *
      * @param string $str
-     * @return boolean
+     *
+     * @return bool
      */
     public static function isTelNumber(string $str)
     {
@@ -262,11 +274,12 @@ class Str
     }
 
     /**
-     * Check if a string has at most a certain number of characters
+     * Check if a string has at most a certain number of characters.
      *
      * @param string $str
-     * @param integer $maxLen
-     * @return boolean
+     * @param int    $maxLen
+     *
+     * @return bool
      */
     public static function isMaxLength(string $str, int $maxLen)
     {
@@ -274,11 +287,12 @@ class Str
     }
 
     /**
-     * Check if a string length has at least a certain number of characters
+     * Check if a string length has at least a certain number of characters.
      *
      * @param string $str
-     * @param integer $minLen
-     * @return boolean
+     * @param int    $minLen
+     *
+     * @return bool
      */
     public static function isMinLength(string $str, int $minLen)
     {
@@ -286,11 +300,12 @@ class Str
     }
 
     /**
-     * Check if a string starts with a certain string
+     * Check if a string starts with a certain string.
      *
      * @param string $startStr
      * @param string $subject
-     * @return boolean
+     *
+     * @return bool
      *
      * For contributors: Do not use preg_match for the check as conflict happen
      * when the delimiters are in the string that is going to be checked
@@ -302,11 +317,12 @@ class Str
     }
 
     /**
-     * Check if a string end with a certain string
+     * Check if a string end with a certain string.
      *
      * @param string $endStr
      * @param string $subject
-     * @return boolean
+     *
+     * @return bool
      *
      * For contributors: Do not use preg_match for the check as conflict happen
      * when the delimiters are in the string that is going to be checked
@@ -328,11 +344,12 @@ class Str
     }
 
     /**
-     * Check if a string contains another string
+     * Check if a string contains another string.
      *
      * @param string $substr
      * @param string $subject
-     * @return boolean
+     *
+     * @return bool
      */
     public static function contains(string $substr, string $subject)
     {
